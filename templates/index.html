@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Generation Interface</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1>Text Generation</h1>
+    <form action="/generate" method="POST">
+        <label for="input-text">Company Name</label>
+        <input type="text" id="input-text" name="company_name">
+        <label for="input-text">Subject Summary</label>
+        <input type="text" id="input-text" name="subject_summary">
+        <label for="input-text">Target Audience</label>
+        <input type="text" id="input-text" name="target_audience">
+        <label for="input-text">Tone</label>
+        <input type="text" id="input-text" name="tone">
+        <button type="submit">Generate Paragraph</button>
+    </form>
+    <div class="output">
+        <p>{{ generated_paragraph }}</p>
+    </div>
+</body>
+</html>
