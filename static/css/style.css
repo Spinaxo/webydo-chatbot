@@ -50,11 +50,88 @@ button[type="submit"]:hover {
   text-align: left;
   width: 600px;
   height: 300px;
-  border: 1px solid black;
+  border: 2px solid rgb(51, 51, 51);
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
-  margin-bottom: 10%;
   border-radius: 5px
+}
+
+.output-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.output label {
+  font-weight: bold;
+}
+
+.slidecontainer {
+  width: 300px; /* Width of the outside container */
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #589fc0;
+  cursor: pointer;
+}
+
+ /* Navigation bar styles */
+ .navbar {
+  background-color: #f2f2f2;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #197b99;
+  color: white;
+}
+
+#spline:hover {
+  background-color: #f2f2f2;
+}
+
+h1 {
+  font-family: Helvetica;
 }
