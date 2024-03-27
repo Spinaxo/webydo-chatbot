@@ -11,11 +11,11 @@
     <div class="navbar">
         <a class="active" href="/">Home</a>
         <a href="{{ url_for('generate_everything') }}">Generation</a>
-        <a href="#">Page 1</a>
-        <a href="#">Page 2</a>
+        <a href="{{ url_for('agents')}}">DID Agents</a>
     </div>
     <h1>Text Generation</h1>
     <form action="/generate" method="POST">
+        
         <label for="input-text">Company Name</label>
         <input type="text" id="input-text" name="company_name">
         <label for="input-text">Subject Summary</label>
@@ -31,9 +31,15 @@
             <input type="range" min="20" max="150" value="75" class="slider" id="length_slider" name="slider_value">
         </div>
         <button type="submit">Generate Paragraph</button> 
+        <div class="loader">
+            <div class="loader-small"></div>
+            <div class="loader-large"></div>
+        </div>
         
     </form>
 
+    
+      
     <div class="output-wrapper">
         <div class="output">
             <label>ChatGPT 3.5 Turbo</label>

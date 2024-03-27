@@ -3,7 +3,7 @@ from openai import OpenAI
 import anthropic
 from dotenv import load_dotenv
 import os
-import json
+import requests
 
 app = Flask(__name__)
 
@@ -11,6 +11,8 @@ app = Flask(__name__)
 load_dotenv()
 gpt_key = os.getenv('gpt_api_key')
 claude_key = os.getenv('claude_api_key')
+did_username = os.getenv('did_username')
+did_password = os.getenv('did_password')
 
 # initialize APIs
 gpt_client = OpenAI(api_key=gpt_key)
@@ -18,7 +20,77 @@ claude_client = anthropic.Anthropic(
     api_key=claude_key
     )
 
+def create_talk():
+    url = "https://api.d-id.com/talks"
+            
+    payload = {
+        "script": {
+            "type": "text",
+            "subtitles": "false",
+            "provider": {
+                "type": "microsoft",
+                "voice_id": "en-US-JennyNeural"
+            },
+            "input": "you're mom"
+        },
+        "config": {
+            "fluent": "false",
+            "pad_audio": "0.0"
+        },
+        "source_url": "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg"
+    }
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic YVd4aGJrQjNaV0o1Wkc4dVkyOXQ6OW1iMHFoWmw1VnR3MmNUTXB4MkpL"
+    }
 
+    
+    post_response = requests.post(url, json=payload, headers=headers)
+    print(post_response.json())
+    talk_id = post_response.json()['id']
+    print(talk_id)
+    return talk_id
+    
+
+def get_talk(talk_id):
+    url = f"https://api.d-id.com/talks/{talk_id}"
+
+    headers = {
+        "accept": "application/json",
+        "authorization": "Basic YVd4aGJrQjNaV0o1Wkc4dVkyOXQ6OW1iMHFoWmw1VnR3MmNUTXB4MkpL"
+    }
+    
+    
+    
+    get_response = requests.get(url, headers=headers)
+    print(get_response.json())
+    get_response_json = get_response.json()
+    print(get_response_json['talks'][20])
+    talk_url = get_response_json['talks'][20]
+
+    return talk_url
+
+# --------------------------------------------------------------------------
+# DID Agents 
+@app.route('/agents', methods=['POST', 'GET'])
+def agents():
+    if request.method == 'POST':
+        talk_id = create_talk()
+        talk_url = get_talk(talk_id)
+        print (f"Talk URL = {talk_url}")
+        
+        
+        
+        
+        return render_template('agents.html', talk_url=talk_url)
+    
+    
+    if request.method == 'GET':
+        
+    
+        
+        return render_template('agents.html')
 
   
 # homescreen  
@@ -28,8 +100,10 @@ def index():
         print(gpt_key)
         print(claude_key)
         return render_template('home.html')
-        
 
+
+
+# paragraph generator
 @app.route('/generate', methods=['POST', 'GET'])
 def generate_everything():
     if request.method == 'POST':

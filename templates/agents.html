@@ -6,8 +6,6 @@
     <link rel="icon" type="image/x-icon" href="static/bossman.png">
     <title>Text Generation Interface</title>
     <link rel="stylesheet" href="static/css/style.css">
-
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.66/build/spline-viewer.js"></script>
     
 </head>
 <body>
@@ -16,10 +14,16 @@
         <a href="{{ url_for('generate_everything') }}">Comparison</a>
         <a href="{{ url_for('agents')}}">DID Agents</a>
     </div>
-    <h1>Welcome to edgyTools!</h1>
-    <div class="spline">
-        <spline-viewer url="https://prod.spline.design/rJmtgM7nwFhCFFe0/scene.splinecode"></spline-viewer>
+    <h1>Agents</h1>
+
+    <div class="output">
+        <p>{{ talk_url }}</p>
     </div>
+    <form action="/agents" method="POST">
+        <button type="submit">Generate Video</button> 
+    </form>
+   
+   
     
     
     
